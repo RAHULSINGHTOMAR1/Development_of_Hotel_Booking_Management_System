@@ -1,0 +1,78 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+Sign up
+{% endblock title %}
+
+{% block body %}
+<main class="form-signup w-100">
+    <div class="container mt-5">
+        <form action="{% url 'signup' %}" method="POST">
+            {% csrf_token %}
+            
+            <!-- Email Field -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required 
+                    pattern="[a-zA-Z0-9._%+-]+@gmail\.com$" 
+                    title="Please enter a valid Gmail address (example@gmail.com)">
+                <div class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+
+            <!-- Username Field -->
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required 
+                    pattern="[A-Za-z]+" 
+                    title="Username should only contain letters.">
+            </div>
+
+            <!-- Password Field -->
+            <!-- <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=.{8,})" 
+                    title="Password must contain at least 8 characters, including a number, an uppercase letter, a lowercase letter, and a special character.">
+            </div> -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required
+                    
+                >
+            </div>
+            
+
+            <!-- Confirm Password Field -->
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required 
+                    title="Please enter the same password again.">
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                <label class="form-check-label" for="terms">I accept all T&C.</label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</main>
+
+<!-- JavaScript for Confirm Password Validation -->
+<script>
+    const password = document.getElementById('password');
+    const confirm_password = document.getElementById('confirm_password');
+
+    confirm_password.addEventListener('input', function () {
+        if (password.value !== confirm_password.value) {
+            confirm_password.setCustomValidity('Passwords do not match.');
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    });
+</script>
+
+{% endblock body %}
